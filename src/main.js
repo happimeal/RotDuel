@@ -3,6 +3,7 @@ import "./style.css";
 
 import { WIDTH, HEIGHT } from "./data/constants.js";
 
+import UsernameScene from "./scenes/UsernameScene.js";
 import MenuScene from "./scenes/MenuScene.js";
 import InventoryScene from "./scenes/InventoryScene.js";
 import WaitingRoomScene from "./scenes/WaitingRoomScene.js";
@@ -15,6 +16,7 @@ const config = {
   height: HEIGHT,
   parent: "app",
   scene: [
+    UsernameScene,
     MenuScene,
     InventoryScene,
     WaitingRoomScene,

@@ -7,6 +7,7 @@ import {
 } from "../data/constants.js";
 
 import { resolveMatch } from "../logic/battleLogic.js";
+import { applyMatchRewards } from "../logic/storage.js";
 
 export default class DuelScene extends Phaser.Scene {
   constructor() {
@@ -23,6 +24,8 @@ export default class DuelScene extends Phaser.Scene {
     this.displayPlayerWins = 0;
     this.displayEnemyWins = 0;
     this.roundObjects = [];
+    this.rewardText = "";
+    this.rewardsSaved = false;
   }
 
   create() {
@@ -373,6 +376,12 @@ export default class DuelScene extends Phaser.Scene {
   showFinalResult() {
     this.clearRoundObjects();
 
+    if (!this.rewardsSaved) {
+      const rewardResult = applyMatchRewards(this.match.winner);
+      this.rewardText = rewardResult.rewardText;
+      this.rewardsSaved = true;
+    }
+
     const playerWon = this.match.winner === "player";
     const enemyWon = this.match.winner === "enemy";
 
@@ -425,19 +434,9 @@ export default class DuelScene extends Phaser.Scene {
         .setOrigin(0.5)
     );
 
-    let rewardText = "+12 XP   +20 Coins   Draw Bonus";
-
-    if (playerWon) {
-      rewardText = "+25 XP   +50 Coins   +1 Bronze Shard";
-    }
-
-    if (enemyWon) {
-      rewardText = "+8 XP   +10 Coins   +1 Pity Point";
-    }
-
     this.addRoundObject(
       this.add
-        .text(WIDTH / 2, 350, rewardText, {
+        .text(WIDTH / 2, 350, this.rewardText, {
           fontSize: "26px",
           color: "#ffcc4d",
           fontFamily: "Arial",
@@ -473,6 +472,10 @@ export default class DuelScene extends Phaser.Scene {
 
     this.createFinalButton(WIDTH / 2, 600, 330, 60, "BACK TO INVENTORY", () => {
       this.scene.start("InventoryScene");
+    });
+
+    this.createFinalButton(WIDTH / 2, 675, 330, 48, "VIEW PROFILE", () => {
+      this.scene.start("ProfileScene");
     });
   }
 

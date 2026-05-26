@@ -2,13 +2,13 @@ import Phaser from "phaser";
 
 import {
   WIDTH,
-  PLAYER_ONE_USERNAME,
   PLAYER_TWO_USERNAME,
   TIER_COLORS,
 } from "../data/constants.js";
 
 import { PLAYER_INVENTORY } from "../data/cards.js";
 import { cloneCard } from "../logic/battleLogic.js";
+import { loadProfile } from "../logic/storage.js";
 
 export default class InventoryScene extends Phaser.Scene {
   constructor() {
@@ -16,6 +16,13 @@ export default class InventoryScene extends Phaser.Scene {
   }
 
   create() {
+    this.profile = loadProfile();
+
+    if (!this.profile.username) {
+      this.scene.start("UsernameScene");
+      return;
+    }
+
     this.lineup = [];
     this.ui = [];
 
@@ -49,7 +56,7 @@ export default class InventoryScene extends Phaser.Scene {
 
     this.addUI(
       this.add
-        .text(WIDTH / 2, 84, "Choose your 3-card lineup in order", {
+        .text(WIDTH / 2, 84, `${this.profile.username}, choose your 3-card lineup in order`, {
           fontSize: "20px",
           color: "#bbbbbb",
           fontFamily: "Arial",
@@ -107,7 +114,7 @@ export default class InventoryScene extends Phaser.Scene {
 
         this.scene.start("WaitingRoomScene", {
           playerLineup: this.lineup.map(cloneCard),
-          playerOneUsername: PLAYER_ONE_USERNAME,
+          playerOneUsername: this.profile.username,
           playerTwoUsername: PLAYER_TWO_USERNAME,
         });
       }
