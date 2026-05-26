@@ -1,3 +1,5 @@
+import { STARTER_PACK, STARTER_CARDS } from "../data/cards.js";
+
 const PROFILE_KEY = "rotduelProfile";
 
 export function getDefaultProfile() {
@@ -9,6 +11,7 @@ export function getDefaultProfile() {
     losses: 0,
     draws: 0,
     bronzeShards: 0,
+    inventory: [{ ...STARTER_PACK }],
   };
 }
 
@@ -45,9 +48,60 @@ export function setUsername(username) {
   return updatedProfile;
 }
 
-export function hasUsername() {
+export function getInventoryItems(category = "All") {
   const profile = loadProfile();
-  return Boolean(profile.username);
+  const inventory = profile.inventory || [];
+
+  if (category === "All") return inventory;
+  if (category === "Cards") return inventory.filter((item) => item.itemType === "card");
+  if (category === "Packs") return inventory.filter((item) => item.itemType === "pack");
+  if (category === "Shards") return inventory.filter((item) => item.itemType === "shard");
+
+  return inventory;
+}
+
+export function getOwnedCards() {
+  return getInventoryItems("Cards");
+}
+
+export function playerHasCards() {
+  return getOwnedCards().length > 0;
+}
+
+export function openStarterPack() {
+  const profile = loadProfile();
+  const inventory = profile.inventory || [];
+
+  const hasStarterPack = inventory.some((item) => item.id === "starter-pack");
+
+  if (!hasStarterPack) {
+    return {
+      success: false,
+      message: "Starter Pack not found.",
+      profile,
+    };
+  }
+
+  const newInventory = inventory.filter((item) => item.id !== "starter-pack");
+
+  const starterCards = STARTER_CARDS.map((card) => ({
+    ...card,
+    acquiredAt: Date.now(),
+  }));
+
+  const updatedProfile = {
+    ...profile,
+    inventory: [...newInventory, ...starterCards],
+  };
+
+  saveProfile(updatedProfile);
+
+  return {
+    success: true,
+    message: "Starter Pack opened. 6 cards added to your inventory.",
+    profile: updatedProfile,
+    cards: starterCards,
+  };
 }
 
 export function applyMatchRewards(matchWinner) {

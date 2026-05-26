@@ -1,7 +1,6 @@
-export const WIDTH = 1100;
-export const HEIGHT = 740;
+export const WIDTH = window.innerWidth;
+export const HEIGHT = window.innerHeight;
 
-export const PLAYER_ONE_USERNAME = "You";
 export const PLAYER_TWO_USERNAME = "Bot_Joined";
 
 export const CLASS_COUNTERS = {

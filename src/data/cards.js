@@ -1,6 +1,7 @@
-export const PLAYER_INVENTORY = [
+export const STARTER_CARDS = [
   {
     id: "tralalero-bronze",
+    itemType: "card",
     name: "Tralalero Tralala",
     tier: "Bronze",
     ovr: 65,
@@ -12,9 +13,11 @@ export const PLAYER_INVENTORY = [
     luck: 18,
     aura: 12,
     special: "Shoe Dash",
+    sellable: false,
   },
   {
     id: "bombardiro-bronze",
+    itemType: "card",
     name: "Bombardiro Crocodilo",
     tier: "Bronze",
     ovr: 67,
@@ -26,9 +29,11 @@ export const PLAYER_INVENTORY = [
     luck: 10,
     aura: 16,
     special: "Bomb Bite",
+    sellable: false,
   },
   {
     id: "sahur-bronze",
+    itemType: "card",
     name: "Tung Tung Tung Sahur",
     tier: "Bronze",
     ovr: 64,
@@ -40,9 +45,11 @@ export const PLAYER_INVENTORY = [
     luck: 25,
     aura: 18,
     special: "Drum Stun",
+    sellable: false,
   },
   {
     id: "ballerina-bronze",
+    itemType: "card",
     name: "Ballerina Cappuccina",
     tier: "Bronze",
     ovr: 66,
@@ -54,9 +61,11 @@ export const PLAYER_INVENTORY = [
     luck: 20,
     aura: 30,
     special: "Cappuccino Spiral",
+    sellable: false,
   },
   {
     id: "chimpanzini-bronze",
+    itemType: "card",
     name: "Chimpanzini Bananini",
     tier: "Bronze",
     ovr: 66,
@@ -68,9 +77,11 @@ export const PLAYER_INVENTORY = [
     luck: 14,
     aura: 14,
     special: "Banana Smash",
+    sellable: false,
   },
   {
     id: "assassino-bronze",
+    itemType: "card",
     name: "Cappuccino Assassino",
     tier: "Bronze",
     ovr: 65,
@@ -82,12 +93,23 @@ export const PLAYER_INVENTORY = [
     luck: 24,
     aura: 16,
     special: "Espresso Slice",
+    sellable: false,
   },
 ];
+
+export const STARTER_PACK = {
+  id: "starter-pack",
+  itemType: "pack",
+  name: "Starter Pack",
+  description: "Open to receive your 6 starting Rotmon cards.",
+  quantity: 1,
+  openable: true,
+};
 
 export const BOT_INVENTORY = [
   {
     id: "bot-bombardiro",
+    itemType: "card",
     name: "Bombardiro Crocodilo",
     tier: "Bronze",
     ovr: 67,
@@ -102,6 +124,7 @@ export const BOT_INVENTORY = [
   },
   {
     id: "bot-brr",
+    itemType: "card",
     name: "Brr Brr Patapim",
     tier: "Bronze",
     ovr: 66,
@@ -116,6 +139,7 @@ export const BOT_INVENTORY = [
   },
   {
     id: "bot-lirili",
+    itemType: "card",
     name: "Lirili Larila",
     tier: "Bronze",
     ovr: 65,
@@ -130,6 +154,7 @@ export const BOT_INVENTORY = [
   },
   {
     id: "bot-frigo",
+    itemType: "card",
     name: "Frigo Camelo",
     tier: "Bronze",
     ovr: 64,
@@ -144,6 +169,7 @@ export const BOT_INVENTORY = [
   },
   {
     id: "bot-bobrito",
+    itemType: "card",
     name: "Bobrito Bandito",
     tier: "Bronze",
     ovr: 66,
@@ -158,6 +184,7 @@ export const BOT_INVENTORY = [
   },
   {
     id: "bot-bombombini",
+    itemType: "card",
     name: "Bombombini Gusini",
     tier: "Bronze",
     ovr: 65,
